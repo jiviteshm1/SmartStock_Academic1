@@ -1,0 +1,6 @@
+{
+  "name": "SmartStock Academic - Inventory & POS System",
+  "description": "Full-stack Point of Sale (POS) and inventory management system with role-based JWT authentication, real-time stock deductions, transaction-safe billing, invoice generation, and analytical sales reporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
