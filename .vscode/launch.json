@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "SmartStock: Run Full-Stack Dev",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev"
+    },
+    {
+      "name": "SmartStock: Run Database Seed",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npx tsx server/seed.ts"
+    }
+  ]
+}
