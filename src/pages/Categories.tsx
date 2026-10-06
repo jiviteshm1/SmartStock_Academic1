@@ -85,10 +85,10 @@ export const Categories: React.FC<CategoriesProps> = ({ currentUser }) => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span className="text-xs font-semibold px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">
               Taxonomy
             </span>
             <span className="text-xs text-slate-400">{categories.length} item categories</span>
@@ -105,13 +105,13 @@ export const Categories: React.FC<CategoriesProps> = ({ currentUser }) => {
           {isAdmin ? (
             <button
               onClick={handleOpenAdd}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg shadow-emerald-950 transition-all active:scale-[0.98]"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold shadow-md shadow-indigo-950/40 transition-all active:scale-[0.98]"
             >
               <Plus className="w-4 h-4" />
               New Category
             </button>
           ) : (
-            <span className="px-3 py-2 rounded-xl bg-slate-800 text-slate-500 text-xs font-medium cursor-not-allowed">
+            <span className="px-3 py-2 rounded-lg bg-slate-800 text-slate-500 text-xs font-medium cursor-not-allowed">
               Admin Only
             </span>
           )}
@@ -123,17 +123,17 @@ export const Categories: React.FC<CategoriesProps> = ({ currentUser }) => {
         {categories.map((c) => (
           <div
             key={c.id}
-            className="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col justify-between hover:border-slate-700 transition-colors"
+            className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm flex flex-col justify-between hover:border-purple-500/40 transition-colors"
           >
             <div>
               <div className="flex items-start justify-between gap-2 mb-2">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center border border-purple-500/20">
                     <Layers className="w-4 h-4" />
                   </div>
                   <h3 className="font-bold text-white text-sm">{c.name}</h3>
                 </div>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-slate-950 text-slate-300 border border-slate-800">
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-950 text-slate-300 border border-slate-800">
                   {c.product_count ?? 0} SKUs
                 </span>
               </div>
@@ -195,7 +195,7 @@ export const Categories: React.FC<CategoriesProps> = ({ currentUser }) => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Electrical Components"
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-purple-500"
                 />
               </div>
 
@@ -206,7 +206,7 @@ export const Categories: React.FC<CategoriesProps> = ({ currentUser }) => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Brief summary of department items..."
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500 resize-none"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-purple-500 resize-none"
                 />
               </div>
 
@@ -221,7 +221,7 @@ export const Categories: React.FC<CategoriesProps> = ({ currentUser }) => {
                 <button
                   type="submit"
                   disabled={formLoading}
-                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-colors"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold shadow-md shadow-indigo-950/40 transition-all active:scale-[0.98]"
                 >
                   {formLoading ? 'Saving...' : editCategory ? 'Save Changes' : 'Create Category'}
                 </button>

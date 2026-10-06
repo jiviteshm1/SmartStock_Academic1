@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import {
-  BarChart3,
   Download,
   CreditCard,
   Banknote,
   QrCode,
-  TrendingUp,
   Award,
   Layers,
   FileSpreadsheet,
-  RefreshCw,
 } from 'lucide-react';
 import { AnalyticsData, User } from '../types/index.ts';
 import { api } from '../api.ts';
+import { formatINR } from '../utils/format.ts';
 
 interface ReportsProps {
   currentUser: User | null;
@@ -55,10 +53,10 @@ export const Reports: React.FC<ReportsProps> = ({ currentUser }) => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span className="text-xs font-semibold px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">
               Business Intelligence
             </span>
             <span className="text-xs text-slate-400">Financial Reporting &amp; Analytics</span>
@@ -67,21 +65,21 @@ export const Reports: React.FC<ReportsProps> = ({ currentUser }) => {
             Store Performance Analytics
           </h1>
           <p className="text-xs text-slate-400 mt-1">
-            Category revenue distribution, payment method shares, and fast-moving SKUs.
+            Department revenue distribution, tender method shares, and fast-moving SKUs.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <button
             onClick={() => handleExport('sales')}
-            className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md shadow-emerald-950 transition-colors"
+            className="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold shadow-md shadow-indigo-950/40 transition-all active:scale-[0.98]"
           >
             <Download className="w-3.5 h-3.5" />
             Export Sales (CSV)
           </button>
           <button
             onClick={() => handleExport('products')}
-            className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors"
+            className="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors"
           >
             <FileSpreadsheet className="w-3.5 h-3.5" />
             Export Catalog
@@ -92,14 +90,14 @@ export const Reports: React.FC<ReportsProps> = ({ currentUser }) => {
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Category Revenue Distribution */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Layers className="w-4 h-4 text-emerald-400" />
-              <h2 className="font-bold text-white text-sm">Revenue by Department / Category</h2>
+              <Layers className="w-4 h-4 text-purple-400" />
+              <h2 className="font-bold text-white text-sm">Revenue by Department</h2>
             </div>
-            <span className="text-xs font-mono font-bold text-slate-400">
-              Total: ${totalCategoryRev.toFixed(2)}
+            <span className="text-xs font-mono font-bold text-slate-300">
+              Total: {formatINR(totalCategoryRev)}
             </span>
           </div>
 
@@ -112,13 +110,13 @@ export const Reports: React.FC<ReportsProps> = ({ currentUser }) => {
                     <span className="font-semibold text-white">{cat.category}</span>
                     <div className="flex items-center gap-2 font-mono">
                       <span className="text-slate-400">{cat.itemsSold} units</span>
-                      <span className="font-bold text-emerald-400">${cat.revenue.toFixed(2)}</span>
+                      <span className="font-bold text-purple-400">{formatINR(cat.revenue)}</span>
                       <span className="text-[11px] text-slate-500">({pct.toFixed(1)}%)</span>
                     </div>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-slate-950 overflow-hidden border border-slate-800">
+                  <div className="w-full h-2 rounded bg-slate-950 overflow-hidden border border-slate-800">
                     <div
-                      className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-purple-600 to-indigo-600 transition-all duration-300"
                       style={{ width: `${Math.max(4, pct)}%` }}
                     />
                   </div>
@@ -135,27 +133,27 @@ export const Reports: React.FC<ReportsProps> = ({ currentUser }) => {
         </div>
 
         {/* Payment Methods Breakdown */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <CreditCard className="w-4 h-4 text-emerald-400" />
+              <CreditCard className="w-4 h-4 text-indigo-400" />
               <h2 className="font-bold text-white text-sm">Tender / Payment Method Split</h2>
             </div>
-            <span className="text-xs font-mono font-bold text-slate-400">
-              ${totalPaymentRev.toFixed(2)}
+            <span className="text-xs font-mono font-bold text-slate-300">
+              {formatINR(totalPaymentRev)}
             </span>
           </div>
 
           <div className="grid grid-cols-3 gap-3 pt-2">
             {/* Cash */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
+            <div className="p-4 rounded-lg bg-slate-950 border border-slate-800 flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-400 mb-2">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-purple-400 mb-2">
                   <Banknote className="w-4 h-4" />
                   Cash
                 </div>
-                <div className="text-lg font-black font-mono text-white">
-                  ${(data?.paymentMethods?.cash?.total || 0).toFixed(2)}
+                <div className="text-base font-bold font-mono text-white">
+                  {formatINR(data?.paymentMethods?.cash?.total || 0)}
                 </div>
               </div>
               <div className="text-[11px] text-slate-400 mt-2 font-mono">
@@ -164,14 +162,14 @@ export const Reports: React.FC<ReportsProps> = ({ currentUser }) => {
             </div>
 
             {/* Card */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
+            <div className="p-4 rounded-lg bg-slate-950 border border-slate-800 flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-blue-400 mb-2">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-indigo-400 mb-2">
                   <CreditCard className="w-4 h-4" />
                   Card
                 </div>
-                <div className="text-lg font-black font-mono text-white">
-                  ${(data?.paymentMethods?.card?.total || 0).toFixed(2)}
+                <div className="text-base font-bold font-mono text-white">
+                  {formatINR(data?.paymentMethods?.card?.total || 0)}
                 </div>
               </div>
               <div className="text-[11px] text-slate-400 mt-2 font-mono">
@@ -180,14 +178,14 @@ export const Reports: React.FC<ReportsProps> = ({ currentUser }) => {
             </div>
 
             {/* UPI */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
+            <div className="p-4 rounded-lg bg-slate-950 border border-slate-800 flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-purple-400 mb-2">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-violet-400 mb-2">
                   <QrCode className="w-4 h-4" />
                   UPI / QR
                 </div>
-                <div className="text-lg font-black font-mono text-white">
-                  ${(data?.paymentMethods?.upi?.total || 0).toFixed(2)}
+                <div className="text-base font-bold font-mono text-white">
+                  {formatINR(data?.paymentMethods?.upi?.total || 0)}
                 </div>
               </div>
               <div className="text-[11px] text-slate-400 mt-2 font-mono">
@@ -207,17 +205,17 @@ export const Reports: React.FC<ReportsProps> = ({ currentUser }) => {
                   UPI: {(((data?.paymentMethods?.upi?.total || 0) / totalPaymentRev) * 100).toFixed(0)}%
                 </span>
               </div>
-              <div className="h-3 rounded-full bg-slate-950 overflow-hidden flex border border-slate-800">
+              <div className="h-2.5 rounded bg-slate-950 overflow-hidden flex border border-slate-800">
                 <div
-                  className="bg-emerald-500 h-full"
+                  className="bg-purple-600 h-full"
                   style={{ width: `${((data?.paymentMethods?.cash?.total || 0) / totalPaymentRev) * 100}%` }}
                 />
                 <div
-                  className="bg-blue-500 h-full"
+                  className="bg-indigo-600 h-full"
                   style={{ width: `${((data?.paymentMethods?.card?.total || 0) / totalPaymentRev) * 100}%` }}
                 />
                 <div
-                  className="bg-purple-500 h-full"
+                  className="bg-violet-500 h-full"
                   style={{ width: `${((data?.paymentMethods?.upi?.total || 0) / totalPaymentRev) * 100}%` }}
                 />
               </div>
@@ -227,7 +225,7 @@ export const Reports: React.FC<ReportsProps> = ({ currentUser }) => {
       </div>
 
       {/* Top 5 Best Selling Products Leaderboard */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Award className="w-4 h-4 text-amber-400" />
@@ -252,13 +250,13 @@ export const Reports: React.FC<ReportsProps> = ({ currentUser }) => {
                 <tr key={item.id} className="hover:bg-slate-850/50 transition-colors">
                   <td className="py-3 px-4 font-bold text-white">
                     <span
-                      className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-mono ${
+                      className={`inline-flex items-center justify-center w-6 h-6 rounded text-xs font-mono ${
                         idx === 0
                           ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40'
                           : idx === 1
                           ? 'bg-slate-300/20 text-slate-300 border border-slate-400/40'
                           : idx === 2
-                          ? 'bg-amber-700/20 text-amber-600 border border-amber-700/40'
+                          ? 'bg-amber-700/20 text-amber-500 border border-amber-700/40'
                           : 'bg-slate-950 text-slate-500'
                       }`}
                     >
@@ -270,8 +268,8 @@ export const Reports: React.FC<ReportsProps> = ({ currentUser }) => {
                   <td className="py-3 px-4 text-center font-mono font-bold text-white">
                     {item.unitsSold} units
                   </td>
-                  <td className="py-3 px-4 text-right font-mono font-extrabold text-emerald-400">
-                    ${item.totalRevenue.toFixed(2)}
+                  <td className="py-3 px-4 text-right font-mono font-bold text-purple-400">
+                    {formatINR(item.totalRevenue)}
                   </td>
                 </tr>
               ))}

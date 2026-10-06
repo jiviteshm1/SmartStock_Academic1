@@ -6,13 +6,12 @@ import {
   AlertTriangle,
   ShoppingCart,
   Receipt,
-  Plus,
   RefreshCw,
   ArrowUpRight,
-  Sparkles,
 } from 'lucide-react';
 import { DashboardKPIs, Sale } from '../types/index.ts';
 import { api } from '../api.ts';
+import { formatINR } from '../utils/format.ts';
 
 interface DashboardProps {
   onNavigate: (tab: string) => void;
@@ -59,7 +58,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
   if (loading && !kpis) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <RefreshCw className="w-6 h-6 text-emerald-400 animate-spin" />
+        <RefreshCw className="w-6 h-6 text-purple-400 animate-spin" />
       </div>
     );
   }
@@ -67,37 +66,38 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
   return (
     <div className="space-y-6">
       {/* Top Banner / Welcome */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-emerald-950/40 border border-slate-800 rounded-2xl p-6 relative overflow-hidden shadow-xl">
+      <div className="bg-gradient-to-r from-slate-900 via-purple-950/30 to-indigo-950/40 border border-purple-900/30 rounded-xl p-6 relative overflow-hidden shadow-sm">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">
                 Academic Store Hub
               </span>
               <span className="text-xs text-slate-400">
-                {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })}
+                {new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })}
               </span>
             </div>
             <h1 className="text-2xl font-black text-white tracking-tight">
               Executive Store Overview
             </h1>
             <p className="text-xs text-slate-400 mt-1 max-w-xl">
-              Live transaction metrics, stock levels, and daily campus sales ledger powered by transactional relational storage.
+              Live transaction metrics, inventory stock levels, and daily campus sales ledger powered by transactional relational storage.
             </p>
           </div>
 
           <div className="flex items-center gap-2.5">
             <button
               onClick={() => onNavigate('billing')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-950 transition-all active:scale-[0.98]"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs shadow-md shadow-indigo-950/50 transition-all active:scale-[0.98]"
             >
               <ShoppingCart className="w-4 h-4" />
               Open POS Terminal
             </button>
             <button
               onClick={fetchKPIs}
-              className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+              className="p-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
               title="Refresh Stats"
+              aria-label="Refresh stats"
             >
               <RefreshCw className="w-4 h-4" />
             </button>
@@ -108,48 +108,48 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Today's Sales */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 relative overflow-hidden shadow-lg">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 relative overflow-hidden shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-400">Today's Revenue</span>
-            <div className="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
-              <DollarSign className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold font-mono text-sm border border-purple-500/20">
+              ₹
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-black text-white tracking-tight">
-              ${(kpis?.todayRevenue ?? 0).toFixed(2)}
+            <div className="text-2xl font-black text-white tracking-tight font-mono">
+              {formatINR(kpis?.todayRevenue ?? 0)}
             </div>
             <div className="flex items-center gap-1.5 mt-1 text-[11px] text-slate-400">
-              <span className="text-emerald-400 font-semibold">{kpis?.todayOrdersCount ?? 0}</span>
+              <span className="text-purple-400 font-semibold">{kpis?.todayOrdersCount ?? 0}</span>
               <span>orders completed today</span>
             </div>
           </div>
         </div>
 
         {/* Total Revenue */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 relative overflow-hidden shadow-lg">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 relative overflow-hidden shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-400">Total Store Revenue</span>
-            <div className="w-8 h-8 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center border border-indigo-500/20">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-black text-white tracking-tight">
-              ${(kpis?.totalRevenue ?? 0).toFixed(2)}
+            <div className="text-2xl font-black text-white tracking-tight font-mono">
+              {formatINR(kpis?.totalRevenue ?? 0)}
             </div>
             <div className="flex items-center gap-1.5 mt-1 text-[11px] text-slate-400">
-              <span className="text-teal-400 font-semibold">{kpis?.totalOrdersCount ?? 0}</span>
+              <span className="text-indigo-400 font-semibold">{kpis?.totalOrdersCount ?? 0}</span>
               <span>lifetime store transactions</span>
             </div>
           </div>
         </div>
 
         {/* Total Stock Units */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 relative overflow-hidden shadow-lg">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 relative overflow-hidden shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-400">Active Inventory</span>
-            <div className="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center border border-blue-500/20">
               <Package className="w-4 h-4" />
             </div>
           </div>
@@ -160,19 +160,19 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
             </div>
             <div className="flex items-center gap-1.5 mt-1 text-[11px] text-slate-400">
               <span>Valuation:</span>
-              <span className="font-semibold text-slate-200">
-                ${(kpis?.inventoryValuation ?? 0).toFixed(2)}
+              <span className="font-semibold text-slate-200 font-mono">
+                {formatINR(kpis?.inventoryValuation ?? 0)}
               </span>
             </div>
           </div>
         </div>
 
         {/* Low Stock Alerts */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 relative overflow-hidden shadow-lg">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 relative overflow-hidden shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-400">Low Stock Warnings</span>
-            <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${
-              (kpis?.lowStockCount ?? 0) > 0 ? 'bg-amber-500/10 text-amber-400' : 'bg-slate-800 text-slate-500'
+            <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+              (kpis?.lowStockCount ?? 0) > 0 ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' : 'bg-slate-800 text-slate-500'
             }`}>
               <AlertTriangle className="w-4 h-4" />
             </div>
@@ -181,7 +181,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
             <div className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
               <span>{kpis?.lowStockCount ?? 0}</span>
               {(kpis?.lowStockCount ?? 0) > 0 && (
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 uppercase">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 uppercase">
                   Action Required
                 </span>
               )}
@@ -196,7 +196,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
       {/* Main 2-Column Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column: Low Stock Alerts */}
-        <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+        <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-amber-400" />
@@ -204,7 +204,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
             </div>
             <button
               onClick={() => onNavigate('products')}
-              className="text-xs text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1"
+              className="text-xs text-purple-400 hover:text-purple-300 font-semibold flex items-center gap-1"
             >
               Manage Inventory
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -242,7 +242,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
                       <td className="py-3 text-right">
                         <button
                           onClick={() => setRestockModalItem({ id: item.id, name: item.name })}
-                          className="px-2.5 py-1 rounded-lg bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 text-[11px] font-bold transition-all"
+                          className="px-2.5 py-1 rounded-lg bg-purple-600/20 hover:bg-gradient-to-r hover:from-purple-600 hover:to-indigo-600 text-purple-300 hover:text-white border border-purple-500/30 text-[11px] font-bold transition-all"
                         >
                           Restock
                         </button>
@@ -254,27 +254,27 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
             </div>
           ) : (
             <div className="p-8 text-center rounded-xl bg-slate-950 border border-slate-800/80">
-              <Package className="w-8 h-8 text-emerald-400 mx-auto mb-2 opacity-80" />
+              <Package className="w-8 h-8 text-purple-400 mx-auto mb-2 opacity-80" />
               <p className="text-xs font-semibold text-slate-200">
-                All inventory levels are healthy!
+                All inventory levels are healthy
               </p>
               <p className="text-[11px] text-slate-500 mt-0.5">
-                No items are currently below their minimum re-order thresholds.
+                No items are currently below their minimum reorder thresholds.
               </p>
             </div>
           )}
         </div>
 
         {/* Right Column: Recent Transactions */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Receipt className="w-4 h-4 text-emerald-400" />
+              <Receipt className="w-4 h-4 text-purple-400" />
               <h2 className="font-bold text-white text-sm">Recent Transactions</h2>
             </div>
             <button
               onClick={() => onNavigate('sales')}
-              className="text-xs text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1"
+              className="text-xs text-purple-400 hover:text-purple-300 font-semibold flex items-center gap-1"
             >
               All Sales
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -287,19 +287,19 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
                 <div
                   key={sale.id}
                   onClick={() => onViewInvoice(sale)}
-                  className="p-3 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 transition-colors cursor-pointer group"
+                  className="p-3 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 transition-colors cursor-pointer group"
                 >
                   <div className="flex items-center justify-between mb-1">
-                    <span className="font-mono text-xs font-bold text-emerald-400 group-hover:underline">
+                    <span className="font-mono text-xs font-bold text-purple-400 group-hover:underline">
                       {sale.invoice_no}
                     </span>
-                    <span className="text-xs font-bold text-white">
-                      ${Number(sale.total_amount).toFixed(2)}
+                    <span className="text-xs font-bold text-white font-mono">
+                      {formatINR(sale.total_amount)}
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-[11px] text-slate-400">
                     <span className="truncate max-w-[140px]">{sale.customer_name}</span>
-                    <span className="uppercase text-[10px] font-mono px-1.5 py-0.2 rounded bg-slate-900 border border-slate-800">
+                    <span className="uppercase text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800">
                       {sale.payment_method}
                     </span>
                   </div>
@@ -318,7 +318,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
       {/* Quick Restock Modal */}
       {restockModalItem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-100">
-          <div className="w-full max-w-sm bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-4">
+          <div className="w-full max-w-sm bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-2xl space-y-4">
             <div>
               <h3 className="font-bold text-white text-base">Quick Restock Units</h3>
               <p className="text-xs text-slate-400 mt-1 line-clamp-1">
@@ -335,7 +335,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
                 min="1"
                 value={restockQty}
                 onChange={(e) => setRestockQty(Math.max(1, parseInt(e.target.value) || 1))}
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-mono text-sm focus:outline-none focus:border-emerald-500"
+                className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white font-mono text-sm focus:outline-none focus:border-purple-500"
               />
             </div>
 
@@ -343,7 +343,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
               <button
                 type="button"
                 onClick={() => setRestockModalItem(null)}
-                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium"
+                className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium"
               >
                 Cancel
               </button>
@@ -351,7 +351,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onViewInvoice 
                 type="button"
                 onClick={handleQuickRestock}
                 disabled={restockLoading}
-                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors"
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold transition-colors shadow-sm"
               >
                 {restockLoading ? 'Updating...' : `Add +${restockQty} Units`}
               </button>

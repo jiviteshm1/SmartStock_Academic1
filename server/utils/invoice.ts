@@ -1,5 +1,9 @@
 import { Sale } from '../db.ts';
 
+function fmt(n: number): string {
+  return `₹${Number(n || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
 export function formatInvoiceHtml(sale: Sale): string {
   const itemsHtml = (sale.items || [])
     .map(
@@ -7,10 +11,10 @@ export function formatInvoiceHtml(sale: Sale): string {
       <tr>
         <td style="padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 13px;">
           <div style="font-weight: 600; color: #0f172a;">${item.product_name}</div>
-          <div style="font-size: 11px; color: #64748b;">SKU: ${item.sku || 'N/A'} · ${item.quantity} × $${item.unit_price.toFixed(2)}</div>
+          <div style="font-size: 11px; color: #64748b;">SKU: ${item.sku || 'N/A'} · ${item.quantity} × ${fmt(item.unit_price)}</div>
         </td>
         <td style="padding: 6px 0; border-bottom: 1px dashed #e2e8f0; text-align: right; font-weight: 600; color: #0f172a; font-size: 13px;">
-          $${item.subtotal.toFixed(2)}
+          ${fmt(item.subtotal)}
         </td>
       </tr>
     `
@@ -51,7 +55,7 @@ export function formatInvoiceHtml(sale: Sale): string {
   <div class="header">
     <div class="store-name">SMARTSTOCK CAMPUS STORE</div>
     <div class="store-subtitle">University Academic Supplies & Lab Depot</div>
-    <div class="store-subtitle">Tax Reg # ACA-8840-2026</div>
+    <div class="store-subtitle">Tax Reg / GSTIN: 29AAAAA0000A1Z5</div>
   </div>
 
   <div class="meta-row"><span>INVOICE:</span><strong>${sale.invoice_no}</strong></div>
@@ -73,17 +77,17 @@ export function formatInvoiceHtml(sale: Sale): string {
     </tbody>
   </table>
 
-  <div class="summary-row"><span>Subtotal:</span><span>$${sale.subtotal.toFixed(2)}</span></div>
-  ${sale.discount > 0 ? `<div class="summary-row" style="color: #16a34a;"><span>Discount:</span><span>-$${sale.discount.toFixed(2)}</span></div>` : ''}
-  <div class="summary-row"><span>Sales Tax (5%):</span><span>$${sale.tax.toFixed(2)}</span></div>
+  <div class="summary-row"><span>Subtotal:</span><span>${fmt(sale.subtotal)}</span></div>
+  ${sale.discount > 0 ? `<div class="summary-row" style="color: #16a34a;"><span>Discount:</span><span>-${fmt(sale.discount)}</span></div>` : ''}
+  <div class="summary-row"><span>GST / Academic Tax (5%):</span><span>${fmt(sale.tax)}</span></div>
   
   <div class="total-row">
     <span>TOTAL DUE:</span>
-    <span>$${sale.total_amount.toFixed(2)}</span>
+    <span>${fmt(sale.total_amount)}</span>
   </div>
 
-  <div class="summary-row"><span>Amount Tendered:</span><span>$${sale.amount_paid.toFixed(2)}</span></div>
-  ${sale.change_returned > 0 ? `<div class="summary-row" style="font-weight: 700;"><span>Change Returned:</span><span>$${sale.change_returned.toFixed(2)}</span></div>` : ''}
+  <div class="summary-row"><span>Amount Tendered:</span><span>${fmt(sale.amount_paid)}</span></div>
+  ${sale.change_returned > 0 ? `<div class="summary-row" style="font-weight: 700;"><span>Change Returned:</span><span>${fmt(sale.change_returned)}</span></div>` : ''}
 
   <div class="footer">
     <p>Thank you for shopping at SmartStock Academic!<br/>

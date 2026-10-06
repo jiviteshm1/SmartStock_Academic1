@@ -3,19 +3,16 @@ import {
   Boxes,
   Plus,
   Search,
-  Filter,
   Edit2,
   Trash2,
   AlertTriangle,
-  RotateCcw,
-  Check,
   X,
-  PackagePlus,
-  DollarSign,
-  Tag,
 } from 'lucide-react';
 import { Product, Category, User } from '../types/index.ts';
 import { api } from '../api.ts';
+import { formatINR } from '../utils/format.ts';
+
+const FALLBACK_IMAGE = '/images/dsa-cpp-book.svg';
 
 interface ProductsProps {
   currentUser: User | null;
@@ -43,11 +40,11 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
     sku: '',
     barcode: '',
     category_id: 1,
-    cost_price: 10,
-    selling_price: 15,
+    cost_price: 350,
+    selling_price: 550,
     stock_quantity: 20,
     min_stock_level: 5,
-    image_url: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=400&auto=format&fit=crop&q=80',
+    image_url: '/images/dsa-cpp-book.svg',
   });
 
   const fetchData = async () => {
@@ -87,7 +84,6 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
     return matchesCat && matchesLow && matchesSearch;
   });
 
-  // Open Edit Modal
   const handleOpenEdit = (p: Product) => {
     setEditProduct(p);
     setFormData({
@@ -103,7 +99,6 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
     });
   };
 
-  // Submit Add
   const handleCreateProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     setActionError('');
@@ -120,7 +115,6 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
     }
   };
 
-  // Submit Edit
   const handleUpdateProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editProduct) return;
@@ -138,7 +132,6 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
     }
   };
 
-  // Submit Restock
   const handleRestock = async () => {
     if (!restockProduct) return;
     try {
@@ -153,7 +146,6 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
     }
   };
 
-  // Delete
   const handleDeleteProduct = async (id: number, name: string) => {
     if (!window.confirm(`Are you sure you want to delete product "${name}"?`)) return;
 
@@ -170,10 +162,10 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span className="text-xs font-semibold px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">
               Inventory Master
             </span>
             <span className="text-xs text-slate-400">{products.length} registered SKUs</span>
@@ -190,7 +182,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
           {isAdmin ? (
             <button
               onClick={() => setIsAddOpen(true)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg shadow-emerald-950 transition-all active:scale-[0.98]"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold shadow-md shadow-indigo-950/40 transition-all active:scale-[0.98]"
             >
               <Plus className="w-4 h-4" />
               Add New Product
@@ -198,7 +190,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
           ) : (
             <span
               title="Admin role required to add products"
-              className="px-3 py-2 rounded-xl bg-slate-800 text-slate-500 text-xs font-medium cursor-not-allowed"
+              className="px-3 py-2 rounded-lg bg-slate-800 text-slate-500 text-xs font-medium cursor-not-allowed"
             >
               Add Product (Admin Only)
             </span>
@@ -207,7 +199,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
       </div>
 
       {/* Filter Bar */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl flex flex-col md:flex-row items-center justify-between gap-3">
+      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
         <div className="flex flex-1 items-center gap-2 w-full md:w-auto">
           {/* Search */}
           <div className="relative flex-1">
@@ -217,7 +209,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by SKU, Name, Barcode..."
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+              className="w-full pl-9 pr-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-purple-500"
             />
           </div>
 
@@ -225,9 +217,9 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
           <select
             value={selectedCat || ''}
             onChange={(e) => setSelectedCat(e.target.value ? Number(e.target.value) : null)}
-            className="px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 focus:outline-none focus:border-emerald-500"
+            className="px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 focus:outline-none focus:border-purple-500"
           >
-            <option value="">All Categories</option>
+            <option value="">All Departments</option>
             {categories.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
@@ -242,7 +234,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
             type="checkbox"
             checked={lowStockOnly}
             onChange={(e) => setLowStockOnly(e.target.checked)}
-            className="w-4 h-4 rounded text-emerald-600 focus:ring-0 bg-slate-950 border-slate-800"
+            className="w-4 h-4 rounded text-purple-600 focus:ring-0 bg-slate-950 border-slate-800"
           />
           <span className="flex items-center gap-1.5">
             <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
@@ -252,14 +244,14 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
       </div>
 
       {/* Products Table */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
+      <div className="bg-slate-900 border border-slate-800 rounded-xl shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="bg-slate-950/80 border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider">
               <tr>
                 <th className="py-3 px-4">Item Details</th>
                 <th className="py-3 px-4">SKU / Barcode</th>
-                <th className="py-3 px-4">Category</th>
+                <th className="py-3 px-4">Department</th>
                 <th className="py-3 px-4 text-right">Cost Price</th>
                 <th className="py-3 px-4 text-right">Retail Price</th>
                 <th className="py-3 px-4 text-center">Margin %</th>
@@ -281,8 +273,18 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
                         <img
-                          src={p.image_url}
+                          src={
+                            p.id === 1 || p.sku === 'BK-DSA-01' || p.name.toLowerCase().includes('data structures')
+                              ? (p.image_url && !p.image_url.includes('photo-1532012164546') ? p.image_url : '/images/dsa-cpp-book.svg')
+                              : (p.image_url || FALLBACK_IMAGE)
+                          }
                           alt={p.name}
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            if (target.src !== '/images/dsa-cpp-book.svg' && !target.src.endsWith('/images/dsa-cpp-book.svg')) {
+                              target.src = '/images/dsa-cpp-book.svg';
+                            }
+                          }}
                           className="w-10 h-10 rounded-lg object-cover bg-slate-950 border border-slate-800 flex-shrink-0"
                           loading="lazy"
                         />
@@ -301,23 +303,23 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                     </td>
 
                     <td className="py-3 px-4 text-slate-300">
-                      <span className="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px]">
+                      <span className="px-2 py-0.5 rounded bg-slate-950 border border-slate-800 text-[11px]">
                         {p.category_name}
                       </span>
                     </td>
 
                     <td className="py-3 px-4 text-right font-mono text-slate-400">
-                      ${p.cost_price.toFixed(2)}
+                      {formatINR(p.cost_price)}
                     </td>
 
-                    <td className="py-3 px-4 text-right font-mono font-bold text-emerald-400">
-                      ${p.selling_price.toFixed(2)}
+                    <td className="py-3 px-4 text-right font-mono font-bold text-purple-400">
+                      {formatINR(p.selling_price)}
                     </td>
 
                     <td className="py-3 px-4 text-center font-mono">
                       <span
                         className={`text-[11px] font-bold ${
-                          margin >= 30 ? 'text-emerald-400' : 'text-slate-400'
+                          margin >= 30 ? 'text-purple-400' : 'text-slate-400'
                         }`}
                       >
                         {margin}%
@@ -334,7 +336,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                           {p.stock_quantity} (Low &le; {p.min_stock_level})
                         </span>
                       ) : (
-                        <span className="inline-flex px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950/60 text-emerald-400 border border-emerald-800/40">
+                        <span className="inline-flex px-2 py-0.5 rounded text-[10px] font-bold bg-purple-950/40 text-purple-300 border border-purple-800/40">
                           {p.stock_quantity} Units
                         </span>
                       )}
@@ -344,7 +346,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                       <div className="flex items-center justify-end gap-1.5">
                         <button
                           onClick={() => setRestockProduct(p)}
-                          className="px-2 py-1 rounded-lg bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 text-[10px] font-bold transition-all"
+                          className="px-2 py-1 rounded-lg bg-purple-600/20 hover:bg-gradient-to-r hover:from-purple-600 hover:to-indigo-600 text-purple-300 hover:text-white border border-purple-500/30 text-[10px] font-bold transition-all"
                           title="Quick Restock Units"
                         >
                           Restock
@@ -356,6 +358,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                               onClick={() => handleOpenEdit(p)}
                               className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
                               title="Edit Product"
+                              aria-label="Edit product"
                             >
                               <Edit2 className="w-3.5 h-3.5" />
                             </button>
@@ -363,6 +366,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                               onClick={() => handleDeleteProduct(p.id, p.name)}
                               className="p-1 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-950/30 transition-colors"
                               title="Delete Product"
+                              aria-label="Delete product"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
@@ -388,7 +392,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
       {/* Add / Edit Modal */}
       {(isAddOpen || editProduct) && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-100">
-          <div className="w-full max-w-lg bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-4">
+          <div className="w-full max-w-lg bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
               <h3 className="font-bold text-white text-base">
                 {isAddOpen ? 'Add New Product SKU' : `Edit Product: ${editProduct?.name}`}
@@ -399,6 +403,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                   setEditProduct(null);
                 }}
                 className="p-1 rounded text-slate-400 hover:text-white"
+                aria-label="Close modal"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -422,7 +427,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g. Modern Physics Lab Manual"
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-purple-500"
                 />
               </div>
 
@@ -435,7 +440,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                     value={formData.sku}
                     onChange={(e) => setFormData({ ...formData, sku: e.target.value.toUpperCase() })}
                     placeholder="e.g. PH-LAB-01"
-                    className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
                 <div>
@@ -446,20 +451,20 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                     value={formData.barcode}
                     onChange={(e) => setFormData({ ...formData, barcode: e.target.value })}
                     placeholder="e.g. 8901009999"
-                    className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-slate-300 mb-1">Category</label>
+                  <label className="block font-semibold text-slate-300 mb-1">Department</label>
                   <select
                     value={formData.category_id}
                     onChange={(e) =>
                       setFormData({ ...formData, category_id: parseInt(e.target.value, 10) })
                     }
-                    className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-purple-500"
                   >
                     {categories.map((c) => (
                       <option key={c.id} value={c.id}>
@@ -475,14 +480,14 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                     value={formData.image_url}
                     onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
                     placeholder="https://images.unsplash.com/..."
-                    className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-slate-300 mb-1">Cost Price ($)</label>
+                  <label className="block font-semibold text-slate-300 mb-1">Cost Price (₹)</label>
                   <input
                     type="number"
                     step="0.01"
@@ -491,11 +496,11 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                     onChange={(e) =>
                       setFormData({ ...formData, cost_price: parseFloat(e.target.value) || 0 })
                     }
-                    className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
                 <div>
-                  <label className="block font-semibold text-slate-300 mb-1">Retail Selling Price ($)</label>
+                  <label className="block font-semibold text-slate-300 mb-1">Retail Selling Price (₹)</label>
                   <input
                     type="number"
                     step="0.01"
@@ -504,7 +509,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                     onChange={(e) =>
                       setFormData({ ...formData, selling_price: parseFloat(e.target.value) || 0 })
                     }
-                    className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
               </div>
@@ -523,7 +528,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                         stock_quantity: parseInt(e.target.value, 10) || 0,
                       })
                     }
-                    className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
                 <div>
@@ -541,7 +546,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                         min_stock_level: parseInt(e.target.value, 10) || 5,
                       })
                     }
-                    className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 font-mono text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
               </div>
@@ -553,14 +558,14 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                     setIsAddOpen(false);
                     setEditProduct(null);
                   }}
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium"
+                  className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={formLoading}
-                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-colors"
+                  className="px-5 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold transition-colors shadow-sm"
                 >
                   {formLoading ? 'Saving...' : isAddOpen ? 'Create Product' : 'Save Changes'}
                 </button>
@@ -573,7 +578,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
       {/* Restock Modal */}
       {restockProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-100">
-          <div className="w-full max-w-sm bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-4">
+          <div className="w-full max-w-sm bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-2xl space-y-4">
             <div>
               <h3 className="font-bold text-white text-base">Restock Units</h3>
               <p className="text-xs text-slate-400 mt-1 line-clamp-1">
@@ -590,7 +595,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                 min="1"
                 value={restockQty}
                 onChange={(e) => setRestockQty(Math.max(1, parseInt(e.target.value) || 1))}
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-mono text-sm focus:outline-none focus:border-emerald-500"
+                className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white font-mono text-sm focus:outline-none focus:border-purple-500"
               />
             </div>
 
@@ -598,7 +603,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
               <button
                 type="button"
                 onClick={() => setRestockProduct(null)}
-                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium"
+                className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium"
               >
                 Cancel
               </button>
@@ -606,7 +611,7 @@ export const Products: React.FC<ProductsProps> = ({ currentUser }) => {
                 type="button"
                 onClick={handleRestock}
                 disabled={formLoading}
-                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors"
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold transition-colors shadow-sm"
               >
                 {formLoading ? 'Adding...' : `Add +${restockQty} Units`}
               </button>

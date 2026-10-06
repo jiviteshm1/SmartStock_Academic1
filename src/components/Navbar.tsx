@@ -50,7 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-950/40 text-white font-bold">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center text-white font-bold shadow-md shadow-indigo-950/40">
               <Store className="w-5 h-5" />
             </div>
             <div>
@@ -58,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="font-extrabold tracking-tight text-lg text-white font-display">
                   SmartStock
                 </span>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">
                   Academic POS
                 </span>
               </div>
@@ -79,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => setActiveTab(item.id)}
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-all ${
                     isActive
-                      ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-900/30 font-semibold'
+                      ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-indigo-950/50 font-semibold'
                       : 'text-slate-300 hover:text-white hover:bg-slate-800'
                   }`}
                 >
@@ -98,11 +98,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               title="Click to inspect Database & Architecture"
               className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 text-slate-300 hover:text-white text-xs transition-colors"
             >
-              <Database className="w-3.5 h-3.5 text-emerald-400" />
+              <Database className="w-3.5 h-3.5 text-purple-400" />
               <span className="hidden lg:inline text-[11px] font-mono">
                 {dbStatus?.isUsingMySQL ? 'MySQL Active' : 'Relational Engine'}
               </span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
             </button>
 
             {/* User Profile / Quick Switcher */}
@@ -155,7 +155,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         Admin (Dr. Vance)
                       </span>
                       {currentUser?.role === 'admin' && (
-                        <span className="text-[10px] text-emerald-400 font-mono">Active</span>
+                        <span className="text-[10px] text-purple-400 font-mono">Active</span>
                       )}
                     </button>
                     <button
@@ -166,11 +166,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                       className="w-full flex items-center justify-between px-3 py-1.5 rounded-md text-xs text-left text-slate-300 hover:bg-slate-800 hover:text-white"
                     >
                       <span className="flex items-center gap-2">
-                        <UserCheck className="w-3.5 h-3.5 text-teal-400" />
+                        <UserCheck className="w-3.5 h-3.5 text-indigo-400" />
                         Cashier (Sarah Jenkins)
                       </span>
                       {currentUser?.role === 'cashier' && (
-                        <span className="text-[10px] text-emerald-400 font-mono">Active</span>
+                        <span className="text-[10px] text-purple-400 font-mono">Active</span>
                       )}
                     </button>
                   </div>
@@ -204,7 +204,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => setActiveTab(item.id)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs whitespace-nowrap transition-all ${
                   isActive
-                    ? 'bg-emerald-600 text-white font-semibold'
+                    ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold'
                     : 'text-slate-300 hover:bg-slate-800'
                 }`}
               >

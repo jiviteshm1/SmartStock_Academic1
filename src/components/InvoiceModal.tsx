@@ -1,6 +1,7 @@
 import React from 'react';
-import { X, Printer, CheckCircle2, Copy, Download } from 'lucide-react';
+import { X, Printer, CheckCircle2, Copy } from 'lucide-react';
 import { Sale } from '../types/index.ts';
+import { formatINR } from '../utils/format.ts';
 
 interface InvoiceModalProps {
   sale: Sale | null;
@@ -28,17 +29,18 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ sale, onClose }) => 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-150">
-      <div className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-100">
+      <div className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/50">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-            <h3 className="font-semibold text-white text-base">Receipt &amp; Invoice</h3>
+            <CheckCircle2 className="w-5 h-5 text-purple-400" />
+            <h3 className="font-semibold text-white text-base">Receipt &amp; Tax Invoice</h3>
           </div>
           <button
             onClick={onClose}
             className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            aria-label="Close invoice dialog"
           >
             <X className="w-4 h-4" />
           </button>
@@ -46,7 +48,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ sale, onClose }) => 
 
         {/* Receipt Paper Container */}
         <div className="p-6 overflow-y-auto bg-slate-950">
-          <div className="bg-white text-slate-900 p-6 rounded-xl font-mono text-xs shadow-inner">
+          <div className="bg-white text-slate-900 p-6 rounded-lg font-mono text-xs shadow-inner">
             {/* Header */}
             <div className="text-center border-b-2 border-dashed border-slate-400 pb-4 mb-4">
               <h2 className="text-base font-extrabold uppercase tracking-wider text-slate-950">
@@ -55,7 +57,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ sale, onClose }) => 
               <p className="text-[11px] text-slate-600 mt-0.5">
                 University Academic Supplies &amp; Lab Depot
               </p>
-              <p className="text-[10px] text-slate-500">Tax ID: ACA-8840-2026</p>
+              <p className="text-[10px] text-slate-500">GSTIN / Tax ID: 29AAAAA0000A1Z5</p>
             </div>
 
             {/* Meta */}
@@ -66,7 +68,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ sale, onClose }) => 
               </div>
               <div className="flex justify-between">
                 <span>DATE:</span>
-                <span>{new Date(sale.created_at).toLocaleString()}</span>
+                <span>{new Date(sale.created_at).toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between">
                 <span>CUSTOMER:</span>
@@ -102,11 +104,11 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ sale, onClose }) => 
                     <td className="py-2 pr-2">
                       <div className="font-bold text-slate-950">{item.product_name}</div>
                       <div className="text-[10px] text-slate-500">
-                        {item.quantity} × ${Number(item.unit_price).toFixed(2)}
+                        {item.quantity} × {formatINR(item.unit_price)}
                       </div>
                     </td>
                     <td className="py-2 text-right font-bold align-top">
-                      ${Number(item.subtotal).toFixed(2)}
+                      {formatINR(item.subtotal)}
                     </td>
                   </tr>
                 ))}
@@ -117,32 +119,32 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ sale, onClose }) => 
             <div className="space-y-1.5 pt-2 border-t border-dashed border-slate-400 text-[11px]">
               <div className="flex justify-between">
                 <span>Subtotal:</span>
-                <span>${Number(sale.subtotal).toFixed(2)}</span>
+                <span>{formatINR(sale.subtotal)}</span>
               </div>
               {sale.discount > 0 && (
-                <div className="flex justify-between text-emerald-700">
+                <div className="flex justify-between text-purple-700">
                   <span>Discount:</span>
-                  <span>-${Number(sale.discount).toFixed(2)}</span>
+                  <span>-{formatINR(sale.discount)}</span>
                 </div>
               )}
               <div className="flex justify-between">
-                <span>Sales Tax (5%):</span>
-                <span>${Number(sale.tax).toFixed(2)}</span>
+                <span>GST / Tax (5%):</span>
+                <span>{formatINR(sale.tax)}</span>
               </div>
 
               <div className="flex justify-between py-2 border-y-2 border-dashed border-slate-950 text-sm font-extrabold text-slate-950">
                 <span>TOTAL DUE:</span>
-                <span>${Number(sale.total_amount).toFixed(2)}</span>
+                <span>{formatINR(sale.total_amount)}</span>
               </div>
 
               <div className="flex justify-between pt-1">
                 <span>Amount Tendered:</span>
-                <span>${Number(sale.amount_paid).toFixed(2)}</span>
+                <span>{formatINR(sale.amount_paid)}</span>
               </div>
               {sale.change_returned > 0 && (
                 <div className="flex justify-between font-bold text-slate-950">
                   <span>Change Returned:</span>
-                  <span>${Number(sale.change_returned).toFixed(2)}</span>
+                  <span>{formatINR(sale.change_returned)}</span>
                 </div>
               )}
             </div>
@@ -150,7 +152,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ sale, onClose }) => 
             {/* Footer */}
             <div className="text-center text-[10px] text-slate-500 mt-6 pt-3 border-t border-slate-200 leading-relaxed">
               <p>Thank you for shopping at SmartStock Academic!</p>
-              <p>Returns accepted within 14 days with original receipt.</p>
+              <p>Returns accepted within 14 days with original tax invoice.</p>
             </div>
           </div>
         </div>
@@ -174,7 +176,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ sale, onClose }) => 
             </button>
             <button
               onClick={handlePrint}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-md shadow-emerald-950 transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold shadow-md shadow-indigo-950/40 transition-all active:scale-[0.98]"
             >
               <Printer className="w-3.5 h-3.5" />
               Print Receipt

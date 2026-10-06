@@ -150,7 +150,7 @@ INSERT INTO categories (id, name, description) VALUES
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-900/60">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/20">
               <Database className="w-5 h-5" />
             </div>
             <div>
@@ -174,7 +174,7 @@ INSERT INTO categories (id, name, description) VALUES
             onClick={() => setActiveTab('status')}
             className={`pb-2.5 px-3 text-xs font-semibold border-b-2 transition-colors ${
               activeTab === 'status'
-                ? 'border-emerald-500 text-emerald-400'
+                ? 'border-purple-500 text-purple-400'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -184,7 +184,7 @@ INSERT INTO categories (id, name, description) VALUES
             onClick={() => setActiveTab('schema')}
             className={`pb-2.5 px-3 text-xs font-semibold border-b-2 transition-colors ${
               activeTab === 'schema'
-                ? 'border-emerald-500 text-emerald-400'
+                ? 'border-purple-500 text-purple-400'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -194,7 +194,7 @@ INSERT INTO categories (id, name, description) VALUES
             onClick={() => setActiveTab('seed')}
             className={`pb-2.5 px-3 text-xs font-semibold border-b-2 transition-colors ${
               activeTab === 'seed'
-                ? 'border-emerald-500 text-emerald-400'
+                ? 'border-purple-500 text-purple-400'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -204,7 +204,7 @@ INSERT INTO categories (id, name, description) VALUES
             onClick={() => setActiveTab('setup')}
             className={`pb-2.5 px-3 text-xs font-semibold border-b-2 transition-colors ${
               activeTab === 'setup'
-                ? 'border-emerald-500 text-emerald-400'
+                ? 'border-purple-500 text-purple-400'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -219,7 +219,7 @@ INSERT INTO categories (id, name, description) VALUES
               <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-slate-400 font-medium">Relational Engine</span>
-                  <span className="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span className="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
                     {status?.engine || 'Active'}
                   </span>
                 </div>
@@ -251,7 +251,7 @@ INSERT INTO categories (id, name, description) VALUES
 
               <div className="p-4 rounded-xl bg-slate-850 border border-slate-800/80">
                 <h4 className="text-xs font-semibold text-white mb-1 flex items-center gap-1.5">
-                  <Server className="w-3.5 h-3.5 text-teal-400" />
+                  <Server className="w-3.5 h-3.5 text-indigo-400" />
                   Dual-Mode Architecture Guarantee
                 </h4>
                 <p className="text-xs text-slate-400 leading-relaxed">
@@ -260,8 +260,8 @@ INSERT INTO categories (id, name, description) VALUES
               </div>
 
               {resetMessage && (
-                <div className="p-3 rounded-lg bg-emerald-950/40 border border-emerald-800 text-emerald-300 text-xs flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <div className="p-3 rounded-lg bg-purple-950/40 border border-purple-800 text-purple-300 text-xs flex items-center gap-2">
+                  <Check className="w-4 h-4 text-purple-400 flex-shrink-0" />
                   {resetMessage}
                 </div>
               )}
@@ -292,11 +292,11 @@ INSERT INTO categories (id, name, description) VALUES
                   onClick={() => handleCopy(schemaSql, 'schema')}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs transition-colors"
                 >
-                  {copiedSchema ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedSchema ? <Check className="w-3.5 h-3.5 text-purple-400" /> : <Copy className="w-3.5 h-3.5" />}
                   {copiedSchema ? 'Copied to Clipboard' : 'Copy SQL'}
                 </button>
               </div>
-              <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-emerald-300 overflow-x-auto max-h-72">
+              <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-purple-300 overflow-x-auto max-h-72">
                 {schemaSql}
               </pre>
             </div>
@@ -312,11 +312,11 @@ INSERT INTO categories (id, name, description) VALUES
                   onClick={() => handleCopy(seedSql, 'seed')}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs transition-colors"
                 >
-                  {copiedSeed ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedSeed ? <Check className="w-3.5 h-3.5 text-purple-400" /> : <Copy className="w-3.5 h-3.5" />}
                   {copiedSeed ? 'Copied to Clipboard' : 'Copy SQL'}
                 </button>
               </div>
-              <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-emerald-300 overflow-x-auto max-h-72">
+              <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-purple-300 overflow-x-auto max-h-72">
                 {seedSql}
               </pre>
             </div>
@@ -326,7 +326,7 @@ INSERT INTO categories (id, name, description) VALUES
             <div className="space-y-3 text-xs text-slate-300">
               <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
                 <h5 className="font-semibold text-white flex items-center gap-1.5">
-                  <Terminal className="w-4 h-4 text-emerald-400" />
+                  <Terminal className="w-4 h-4 text-purple-400" />
                   Running on macOS (Apple Silicon / Intel with Homebrew)
                 </h5>
                 <pre className="p-2.5 rounded bg-slate-900 font-mono text-[11px] text-slate-300 overflow-x-auto">
@@ -340,7 +340,7 @@ INSERT INTO categories (id, name, description) VALUES
 
               <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
                 <h5 className="font-semibold text-white flex items-center gap-1.5">
-                  <Terminal className="w-4 h-4 text-emerald-400" />
+                  <Terminal className="w-4 h-4 text-purple-400" />
                   Running on Linux (Ubuntu / Debian)
                 </h5>
                 <pre className="p-2.5 rounded bg-slate-900 font-mono text-[11px] text-slate-300 overflow-x-auto">

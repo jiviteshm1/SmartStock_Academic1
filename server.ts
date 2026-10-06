@@ -22,6 +22,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static assets from public folder
+const publicPath = path.resolve(__dirname, 'public');
+app.use(express.static(publicPath));
+app.use('/images', express.static(path.resolve(publicPath, 'images')));
+
 // Health Check
 app.get('/api/health', (_req, res) => {
   res.json({

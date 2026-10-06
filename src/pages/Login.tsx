@@ -47,17 +47,14 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-950 relative overflow-hidden">
-      {/* Background radial gradient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div className="relative w-full max-w-md">
-        {/* Brand Card */}
+    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-950">
+      <div className="w-full max-w-md">
+        {/* Brand Header */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 shadow-xl shadow-emerald-950/50 mb-3 text-white">
-            <Store className="w-7 h-7" />
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 mb-3 text-white shadow-md shadow-indigo-950/50">
+            <Store className="w-6 h-6" />
           </div>
-          <h1 className="text-2xl font-extrabold text-white tracking-tight">
+          <h1 className="text-2xl font-black text-white tracking-tight">
             SmartStock Academic
           </h1>
           <p className="text-xs text-slate-400 mt-1">
@@ -66,16 +63,16 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         </div>
 
         {/* Main Box */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 sm:p-8 shadow-sm space-y-6">
           <div>
-            <h2 className="text-lg font-bold text-white">Operator Sign In</h2>
+            <h2 className="text-base font-bold text-white">Operator Sign In</h2>
             <p className="text-xs text-slate-400 mt-0.5">
-              Enter your staff credentials or use 1-click demo access below.
+              Enter staff credentials or select a verified demo profile below.
             </p>
           </div>
 
           {error && (
-            <div className="p-3 rounded-xl bg-rose-950/50 border border-rose-800/80 text-rose-300 text-xs flex items-center gap-2">
+            <div className="p-3 rounded-lg bg-rose-950/50 border border-rose-800/80 text-rose-300 text-xs flex items-center gap-2">
               <AlertCircle className="w-4 h-4 text-rose-400 flex-shrink-0" />
               <span>{error}</span>
             </div>
@@ -94,7 +91,7 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="admin or cashier"
-                  className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="w-full pl-9 pr-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white text-xs placeholder-slate-600 focus:outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
             </div>
@@ -111,7 +108,7 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition-colors"
+                  className="w-full pl-9 pr-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white text-xs placeholder-slate-600 focus:outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
             </div>
@@ -119,7 +116,7 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-[0.99] font-bold text-white text-xs shadow-lg shadow-emerald-950 transition-all flex items-center justify-center gap-2"
+              className="w-full py-2.5 px-4 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-bold text-white text-xs shadow-md shadow-indigo-950/40 transition-all flex items-center justify-center gap-2 active:scale-[0.99]"
             >
               {loading ? (
                 <span>Authenticating...</span>
@@ -142,34 +139,33 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                 type="button"
                 onClick={() => handleQuickLogin('cashier')}
                 disabled={loading}
-                className="p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-left transition-colors group"
+                className="p-2.5 rounded-lg bg-slate-950 hover:bg-slate-800/80 hover:border-purple-500/40 border border-slate-800 text-left transition-all"
               >
                 <div className="flex items-center gap-1.5 mb-1">
-                  <UserCheck className="w-3.5 h-3.5 text-teal-400" />
+                  <UserCheck className="w-3.5 h-3.5 text-purple-400" />
                   <span className="text-xs font-bold text-white">Cashier</span>
                 </div>
-                <p className="text-[10px] text-slate-400 line-clamp-1">Sarah Jenkins</p>
-                <p className="text-[9px] font-mono text-emerald-400 mt-0.5">cashier / cashier123</p>
+                <p className="text-[10px] text-slate-400 truncate">Sarah Jenkins</p>
+                <p className="text-[9px] font-mono text-purple-400 mt-0.5">cashier / cashier123</p>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleQuickLogin('admin')}
                 disabled={loading}
-                className="p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-left transition-colors group"
+                className="p-2.5 rounded-lg bg-slate-950 hover:bg-slate-800/80 hover:border-indigo-500/40 border border-slate-800 text-left transition-all"
               >
                 <div className="flex items-center gap-1.5 mb-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
                   <span className="text-xs font-bold text-white">Admin</span>
                 </div>
-                <p className="text-[10px] text-slate-400 line-clamp-1">Dr. Alistair Vance</p>
-                <p className="text-[9px] font-mono text-emerald-400 mt-0.5">admin / admin123</p>
+                <p className="text-[10px] text-slate-400 truncate">Dr. Alistair Vance</p>
+                <p className="text-[9px] font-mono text-indigo-400 mt-0.5">admin / admin123</p>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Security watermark */}
         <p className="text-center text-[11px] text-slate-500 mt-4">
           SmartStock Academic v1.0.0 · Production MySQL &amp; JWT Verified
         </p>

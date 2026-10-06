@@ -151,11 +151,11 @@ function getSeedData(): DatabaseState {
       sku: 'BK-DSA-01',
       barcode: '8901001001',
       category_id: 1,
-      cost_price: 32.0,
-      selling_price: 48.0,
+      cost_price: 450.0,
+      selling_price: 650.0,
       stock_quantity: 24,
       min_stock_level: 5,
-      image_url: 'https://images.unsplash.com/photo-1532012164546-f432f2e3777a?w=400&auto=format&fit=crop&q=80',
+      image_url: '/images/dsa-cpp-book.svg',
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     },
@@ -165,8 +165,8 @@ function getSeedData(): DatabaseState {
       sku: 'BK-OS-10',
       barcode: '8901001002',
       category_id: 1,
-      cost_price: 42.0,
-      selling_price: 65.0,
+      cost_price: 550.0,
+      selling_price: 850.0,
       stock_quantity: 18,
       min_stock_level: 5,
       image_url: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80',
@@ -179,8 +179,8 @@ function getSeedData(): DatabaseState {
       sku: 'EL-ARD-25',
       barcode: '8901002001',
       category_id: 2,
-      cost_price: 28.5,
-      selling_price: 42.0,
+      cost_price: 950.0,
+      selling_price: 1450.0,
       stock_quantity: 14,
       min_stock_level: 5,
       image_url: 'https://images.unsplash.com/photo-1553406830-ef2513450d76?w=400&auto=format&fit=crop&q=80',
@@ -193,8 +193,8 @@ function getSeedData(): DatabaseState {
       sku: 'EL-DMM-01',
       barcode: '8901002002',
       category_id: 2,
-      cost_price: 15.0,
-      selling_price: 24.5,
+      cost_price: 450.0,
+      selling_price: 750.0,
       stock_quantity: 8,
       min_stock_level: 4,
       image_url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&auto=format&fit=crop&q=80',
@@ -207,8 +207,8 @@ function getSeedData(): DatabaseState {
       sku: 'EL-SGL-01',
       barcode: '8901002003',
       category_id: 2,
-      cost_price: 4.5,
-      selling_price: 8.5,
+      cost_price: 90.0,
+      selling_price: 160.0,
       stock_quantity: 3, // LOW STOCK TRIGGER
       min_stock_level: 10,
       image_url: 'https://images.unsplash.com/photo-1584744982491-665216d95f8b?w=400&auto=format&fit=crop&q=80',
@@ -221,8 +221,8 @@ function getSeedData(): DatabaseState {
       sku: 'ST-ED-A2',
       barcode: '8901003001',
       category_id: 3,
-      cost_price: 7.0,
-      selling_price: 12.0,
+      cost_price: 120.0,
+      selling_price: 200.0,
       stock_quantity: 35,
       min_stock_level: 10,
       image_url: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=400&auto=format&fit=crop&q=80',
@@ -235,8 +235,8 @@ function getSeedData(): DatabaseState {
       sku: 'ST-NB-05',
       barcode: '8901003002',
       category_id: 3,
-      cost_price: 3.2,
-      selling_price: 6.0,
+      cost_price: 45.0,
+      selling_price: 80.0,
       stock_quantity: 60,
       min_stock_level: 15,
       image_url: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400&auto=format&fit=crop&q=80',
@@ -249,11 +249,11 @@ function getSeedData(): DatabaseState {
       sku: 'ST-TP-05',
       barcode: '8901003003',
       category_id: 3,
-      cost_price: 3.8,
-      selling_price: 7.5,
+      cost_price: 60.0,
+      selling_price: 120.0,
       stock_quantity: 2, // LOW STOCK TRIGGER
       min_stock_level: 10,
-      image_url: 'https://images.unsplash.com/photo-1589330694653-dad6d3240a2b?w=400&auto=format&fit=crop&q=80',
+      image_url: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=500&auto=format&fit=crop&q=80',
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     },
@@ -263,8 +263,8 @@ function getSeedData(): DatabaseState {
       sku: 'EL-CALC-99',
       barcode: '8901004001',
       category_id: 4,
-      cost_price: 17.5,
-      selling_price: 27.99,
+      cost_price: 850.0,
+      selling_price: 1299.0,
       stock_quantity: 12,
       min_stock_level: 5,
       image_url: 'https://images.unsplash.com/photo-1611125832047-1d7ad1e8e48f?w=400&auto=format&fit=crop&q=80',
@@ -277,8 +277,8 @@ function getSeedData(): DatabaseState {
       sku: 'ST-CMP-02',
       barcode: '8901004002',
       category_id: 4,
-      cost_price: 8.5,
-      selling_price: 14.5,
+      cost_price: 180.0,
+      selling_price: 320.0,
       stock_quantity: 20,
       min_stock_level: 6,
       image_url: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=400&auto=format&fit=crop&q=80',
@@ -291,8 +291,8 @@ function getSeedData(): DatabaseState {
       sku: 'UN-HD-NV',
       barcode: '8901005001',
       category_id: 5,
-      cost_price: 21.0,
-      selling_price: 36.0,
+      cost_price: 650.0,
+      selling_price: 1199.0,
       stock_quantity: 16,
       min_stock_level: 5,
       image_url: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&auto=format&fit=crop&q=80',
@@ -308,14 +308,14 @@ function getSeedData(): DatabaseState {
       user_id: 2,
       cashier_name: 'Sarah Jenkins (Cashier)',
       customer_name: 'Alex Turner (Student ID: 4920)',
-      customer_phone: '+1 555-0192',
-      subtotal: 54.0,
-      discount: 2.0,
-      tax: 2.6,
-      total_amount: 54.6,
+      customer_phone: '+91 98765 43210',
+      subtotal: 730.0,
+      discount: 30.0,
+      tax: 35.0,
+      total_amount: 735.0,
       payment_method: 'cash',
-      amount_paid: 60.0,
-      change_returned: 5.4,
+      amount_paid: 800.0,
+      change_returned: 65.0,
       status: 'completed',
       created_at: new Date(Date.now() - 4 * 3600000).toISOString(),
     },
@@ -329,8 +329,8 @@ function getSeedData(): DatabaseState {
       product_name: 'Data Structures & Algorithms in C++',
       sku: 'BK-DSA-01',
       quantity: 1,
-      unit_price: 48.0,
-      subtotal: 48.0,
+      unit_price: 650.0,
+      subtotal: 650.0,
     },
     {
       id: 2,
@@ -339,8 +339,8 @@ function getSeedData(): DatabaseState {
       product_name: 'College Spiral Notebook 5-Subject 200 Pages',
       sku: 'ST-NB-05',
       quantity: 1,
-      unit_price: 6.0,
-      subtotal: 6.0,
+      unit_price: 80.0,
+      subtotal: 80.0,
     },
   ];
 
@@ -378,6 +378,12 @@ function initStore(): void {
     try {
       const content = fs.readFileSync(DATA_FILE, 'utf-8');
       store = JSON.parse(content);
+      // Migrate product 1 image if it had a broken or external link
+      const dsaProduct = store.products?.find((p) => p.id === 1 || p.sku === 'BK-DSA-01');
+      if (dsaProduct && (!dsaProduct.image_url || dsaProduct.image_url.includes('photo-1532012164546') || dsaProduct.image_url.includes('unsplash'))) {
+        dsaProduct.image_url = '/images/dsa-cpp-book.svg';
+        saveStore();
+      }
       return;
     } catch (err) {
       console.warn('Error reading existing database file, re-initializing seed data:', err);
@@ -734,7 +740,7 @@ export const db = {
 
     const amountPaid = Number(payload.amount_paid) || totalAmount;
     if (payload.payment_method === 'cash' && amountPaid < totalAmount) {
-      throw new Error(`Amount paid ($${amountPaid.toFixed(2)}) is less than total amount ($${totalAmount.toFixed(2)})`);
+      throw new Error(`Amount paid (₹${amountPaid.toFixed(2)}) is less than total amount (₹${totalAmount.toFixed(2)})`);
     }
 
     const changeReturned = payload.payment_method === 'cash'

@@ -3,18 +3,18 @@
     {
       "id": 1,
       "username": "admin",
-      "password_hash": "$2b$10$MmYwaQIlmQbj67kzaH1Qi.895xiJeqx4SdrCK5jjQsJd0XlledFie",
+      "password_hash": "$2b$10$FKT0sYJTht0LXRK/lq4hWeqNxjZ70RoqJ5Dl2qDskUDu3REbSEuYK",
       "full_name": "Dr. Alistair Vance (Admin)",
       "role": "admin",
-      "created_at": "2026-09-06T16:48:15.620Z"
+      "created_at": "2026-09-06T18:23:37.151Z"
     },
     {
       "id": 2,
       "username": "cashier",
-      "password_hash": "$2b$10$MmYwaQIlmQbj67kzaH1Qi.1P.u5RYWlP8pcCWONwMfQAMD02.NJFq",
+      "password_hash": "$2b$10$FKT0sYJTht0LXRK/lq4hWelmM86CkLyfsu3/7D.4UrLDZHuTJXeoC",
       "full_name": "Sarah Jenkins (Cashier)",
       "role": "cashier",
-      "created_at": "2026-09-21T16:48:15.620Z"
+      "created_at": "2026-09-21T18:23:37.151Z"
     }
   ],
   "categories": [
@@ -22,31 +22,31 @@
       "id": 1,
       "name": "Textbooks & Guides",
       "description": "Academic curriculum texts & technical references",
-      "created_at": "2026-10-06T16:48:15.620Z"
+      "created_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 2,
       "name": "Lab Hardware & Kits",
       "description": "Microcontrollers, sensors, breadboards, and components",
-      "created_at": "2026-10-06T16:48:15.620Z"
+      "created_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 3,
       "name": "Stationery & Drafting",
       "description": "Technical drafting sheets, notebooks, pens, and paper",
-      "created_at": "2026-10-06T16:48:15.620Z"
+      "created_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 4,
       "name": "Calculators & Tech",
       "description": "Scientific/graphing calculators and math instruments",
-      "created_at": "2026-10-06T16:48:15.620Z"
+      "created_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 5,
       "name": "Campus Merch & Safety",
       "description": "Lab goggles, coats, bags, and student merchandise",
-      "created_at": "2026-10-06T16:48:15.620Z"
+      "created_at": "2026-10-06T18:23:37.151Z"
     }
   ],
   "products": [
@@ -56,13 +56,13 @@
       "sku": "BK-DSA-01",
       "barcode": "8901001001",
       "category_id": 1,
-      "cost_price": 32,
-      "selling_price": 48,
+      "cost_price": 450,
+      "selling_price": 650,
       "stock_quantity": 24,
       "min_stock_level": 5,
-      "image_url": "https://images.unsplash.com/photo-1532012164546-f432f2e3777a?w=400&auto=format&fit=crop&q=80",
-      "created_at": "2026-10-06T16:48:15.620Z",
-      "updated_at": "2026-10-06T16:48:15.620Z"
+      "image_url": "/images/dsa-cpp-book.svg",
+      "created_at": "2026-10-06T18:23:37.151Z",
+      "updated_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 2,
@@ -70,13 +70,13 @@
       "sku": "BK-OS-10",
       "barcode": "8901001002",
       "category_id": 1,
-      "cost_price": 42,
-      "selling_price": 65,
+      "cost_price": 550,
+      "selling_price": 850,
       "stock_quantity": 18,
       "min_stock_level": 5,
       "image_url": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&auto=format&fit=crop&q=80",
-      "created_at": "2026-10-06T16:48:15.620Z",
-      "updated_at": "2026-10-06T16:48:15.620Z"
+      "created_at": "2026-10-06T18:23:37.151Z",
+      "updated_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 3,
@@ -84,13 +84,13 @@
       "sku": "EL-ARD-25",
       "barcode": "8901002001",
       "category_id": 2,
-      "cost_price": 28.5,
-      "selling_price": 42,
-      "stock_quantity": 12,
+      "cost_price": 950,
+      "selling_price": 1450,
+      "stock_quantity": 14,
       "min_stock_level": 5,
       "image_url": "https://images.unsplash.com/photo-1553406830-ef2513450d76?w=400&auto=format&fit=crop&q=80",
-      "created_at": "2026-10-06T16:48:15.621Z",
-      "updated_at": "2026-10-06T16:48:33.113Z"
+      "created_at": "2026-10-06T18:23:37.151Z",
+      "updated_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 4,
@@ -98,13 +98,13 @@
       "sku": "EL-DMM-01",
       "barcode": "8901002002",
       "category_id": 2,
-      "cost_price": 15,
-      "selling_price": 24.5,
+      "cost_price": 450,
+      "selling_price": 750,
       "stock_quantity": 8,
       "min_stock_level": 4,
       "image_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&auto=format&fit=crop&q=80",
-      "created_at": "2026-10-06T16:48:15.621Z",
-      "updated_at": "2026-10-06T16:48:15.621Z"
+      "created_at": "2026-10-06T18:23:37.151Z",
+      "updated_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 5,
@@ -112,13 +112,13 @@
       "sku": "EL-SGL-01",
       "barcode": "8901002003",
       "category_id": 2,
-      "cost_price": 4.5,
-      "selling_price": 8.5,
+      "cost_price": 90,
+      "selling_price": 160,
       "stock_quantity": 3,
       "min_stock_level": 10,
       "image_url": "https://images.unsplash.com/photo-1584744982491-665216d95f8b?w=400&auto=format&fit=crop&q=80",
-      "created_at": "2026-10-06T16:48:15.621Z",
-      "updated_at": "2026-10-06T16:48:15.621Z"
+      "created_at": "2026-10-06T18:23:37.151Z",
+      "updated_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 6,
@@ -126,13 +126,13 @@
       "sku": "ST-ED-A2",
       "barcode": "8901003001",
       "category_id": 3,
-      "cost_price": 7,
-      "selling_price": 12,
+      "cost_price": 120,
+      "selling_price": 200,
       "stock_quantity": 35,
       "min_stock_level": 10,
       "image_url": "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=400&auto=format&fit=crop&q=80",
-      "created_at": "2026-10-06T16:48:15.621Z",
-      "updated_at": "2026-10-06T16:48:15.621Z"
+      "created_at": "2026-10-06T18:23:37.151Z",
+      "updated_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 7,
@@ -140,13 +140,13 @@
       "sku": "ST-NB-05",
       "barcode": "8901003002",
       "category_id": 3,
-      "cost_price": 3.2,
-      "selling_price": 6,
+      "cost_price": 45,
+      "selling_price": 80,
       "stock_quantity": 60,
       "min_stock_level": 15,
       "image_url": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400&auto=format&fit=crop&q=80",
-      "created_at": "2026-10-06T16:48:15.621Z",
-      "updated_at": "2026-10-06T16:48:15.621Z"
+      "created_at": "2026-10-06T18:23:37.151Z",
+      "updated_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 8,
@@ -154,13 +154,13 @@
       "sku": "ST-TP-05",
       "barcode": "8901003003",
       "category_id": 3,
-      "cost_price": 3.8,
-      "selling_price": 7.5,
+      "cost_price": 60,
+      "selling_price": 120,
       "stock_quantity": 2,
       "min_stock_level": 10,
-      "image_url": "https://images.unsplash.com/photo-1589330694653-dad6d3240a2b?w=400&auto=format&fit=crop&q=80",
-      "created_at": "2026-10-06T16:48:15.621Z",
-      "updated_at": "2026-10-06T16:48:15.621Z"
+      "image_url": "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=500&auto=format&fit=crop&q=80",
+      "created_at": "2026-10-06T18:23:37.151Z",
+      "updated_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 9,
@@ -168,13 +168,13 @@
       "sku": "EL-CALC-99",
       "barcode": "8901004001",
       "category_id": 4,
-      "cost_price": 17.5,
-      "selling_price": 27.99,
+      "cost_price": 850,
+      "selling_price": 1299,
       "stock_quantity": 12,
       "min_stock_level": 5,
       "image_url": "https://images.unsplash.com/photo-1611125832047-1d7ad1e8e48f?w=400&auto=format&fit=crop&q=80",
-      "created_at": "2026-10-06T16:48:15.621Z",
-      "updated_at": "2026-10-06T16:48:15.621Z"
+      "created_at": "2026-10-06T18:23:37.151Z",
+      "updated_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 10,
@@ -182,13 +182,13 @@
       "sku": "ST-CMP-02",
       "barcode": "8901004002",
       "category_id": 4,
-      "cost_price": 8.5,
-      "selling_price": 14.5,
+      "cost_price": 180,
+      "selling_price": 320,
       "stock_quantity": 20,
       "min_stock_level": 6,
       "image_url": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=400&auto=format&fit=crop&q=80",
-      "created_at": "2026-10-06T16:48:15.621Z",
-      "updated_at": "2026-10-06T16:48:15.621Z"
+      "created_at": "2026-10-06T18:23:37.151Z",
+      "updated_at": "2026-10-06T18:23:37.151Z"
     },
     {
       "id": 11,
@@ -196,61 +196,32 @@
       "sku": "UN-HD-NV",
       "barcode": "8901005001",
       "category_id": 5,
-      "cost_price": 21,
-      "selling_price": 36,
+      "cost_price": 650,
+      "selling_price": 1199,
       "stock_quantity": 16,
       "min_stock_level": 5,
       "image_url": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&auto=format&fit=crop&q=80",
-      "created_at": "2026-10-06T16:48:15.621Z",
-      "updated_at": "2026-10-06T16:48:15.621Z"
+      "created_at": "2026-10-06T18:23:37.151Z",
+      "updated_at": "2026-10-06T18:23:37.151Z"
     }
   ],
   "sales": [
-    {
-      "id": 2,
-      "invoice_no": "INV-202610-0001",
-      "user_id": 2,
-      "cashier_name": "Sarah Jenkins (Cashier)",
-      "customer_name": "John Doe",
-      "customer_phone": "",
-      "subtotal": 84,
-      "discount": 0,
-      "tax": 4.2,
-      "total_amount": 88.2,
-      "payment_method": "cash",
-      "amount_paid": 100,
-      "change_returned": 11.8,
-      "status": "completed",
-      "created_at": "2026-10-06T16:48:33.113Z",
-      "items": [
-        {
-          "id": 3,
-          "sale_id": 2,
-          "product_id": 3,
-          "product_name": "Arduino Mega 2560 Pro Kit",
-          "sku": "EL-ARD-25",
-          "quantity": 2,
-          "unit_price": 42,
-          "subtotal": 84
-        }
-      ]
-    },
     {
       "id": 1,
       "invoice_no": "INV-202610-0001",
       "user_id": 2,
       "cashier_name": "Sarah Jenkins (Cashier)",
       "customer_name": "Alex Turner (Student ID: 4920)",
-      "customer_phone": "+1 555-0192",
-      "subtotal": 54,
-      "discount": 2,
-      "tax": 2.6,
-      "total_amount": 54.6,
+      "customer_phone": "+91 98765 43210",
+      "subtotal": 730,
+      "discount": 30,
+      "tax": 35,
+      "total_amount": 735,
       "payment_method": "cash",
-      "amount_paid": 60,
-      "change_returned": 5.4,
+      "amount_paid": 800,
+      "change_returned": 65,
       "status": "completed",
-      "created_at": "2026-10-06T12:48:15.621Z"
+      "created_at": "2026-10-06T14:23:37.151Z"
     }
   ],
   "sale_items": [
@@ -261,8 +232,8 @@
       "product_name": "Data Structures & Algorithms in C++",
       "sku": "BK-DSA-01",
       "quantity": 1,
-      "unit_price": 48,
-      "subtotal": 48
+      "unit_price": 650,
+      "subtotal": 650
     },
     {
       "id": 2,
@@ -271,26 +242,16 @@
       "product_name": "College Spiral Notebook 5-Subject 200 Pages",
       "sku": "ST-NB-05",
       "quantity": 1,
-      "unit_price": 6,
-      "subtotal": 6
-    },
-    {
-      "id": 3,
-      "sale_id": 2,
-      "product_id": 3,
-      "product_name": "Arduino Mega 2560 Pro Kit",
-      "sku": "EL-ARD-25",
-      "quantity": 2,
-      "unit_price": 42,
-      "subtotal": 84
+      "unit_price": 80,
+      "subtotal": 80
     }
   ],
   "meta": {
     "nextUserId": 3,
     "nextCategoryId": 6,
     "nextProductId": 12,
-    "nextSaleId": 3,
-    "nextSaleItemId": 4,
+    "nextSaleId": 2,
+    "nextSaleItemId": 3,
     "invoiceCounter": 2
   }
 }
